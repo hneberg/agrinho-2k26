@@ -182,3 +182,29 @@ footer{
     }
 
 }
+body{
+background:#e8f5e9;
+font-family:Arial;
+}
+
+header{
+background:#2e7d32;
+color:white;
+padding:30px;
+text-align:center;
+}
+
+section{
+display:flex;
+gap:20px;
+padding:50px;
+justify-content:center;
+}
+
+.card{
+background:white;
+padding:30px;
+border-radius:20px;
+width:300px;
+box-shadow:0 10px 20px rgba(0,0,0,.2);
+}
