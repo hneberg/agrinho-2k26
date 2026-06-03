@@ -208,3 +208,17 @@ border-radius:20px;
 width:300px;
 box-shadow:0 10px 20px rgba(0,0,0,.2);
 }
+.timeline{
+display:flex;
+justify-content:space-around;
+padding:100px;
+}
+
+.evento{
+background:white;
+padding:20px;
+border-radius:20px;
+box-shadow:0 10px 20px rgba(0,0,0,.1);
+width:200px;
+text-align:center;
+}
