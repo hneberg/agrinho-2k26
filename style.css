@@ -1,0 +1,184 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:#f4fff3;
+    color:#222;
+    transition:0.4s;
+}
+
+.dark{
+    background:#121212;
+    color:white;
+}
+
+header{
+    height:100vh;
+    background:
+    linear-gradient(rgba(0,0,0,.5),
+    rgba(0,0,0,.5)),
+    url("https://images.unsplash.com/photo-1500937386664-56d1dfef3854");
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+}
+
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 10%;
+}
+
+nav h2{
+    color:white;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:30px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+#modo{
+    border:none;
+    padding:10px;
+    border-radius:50%;
+    cursor:pointer;
+}
+
+.hero{
+    height:80vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    color:white;
+}
+
+.hero h1{
+    font-size:4rem;
+}
+
+.hero p{
+    margin:20px;
+    font-size:1.2rem;
+}
+
+.btn{
+    padding:15px 30px;
+    background:#39a845;
+    color:white;
+    text-decoration:none;
+    border-radius:30px;
+}
+
+section{
+    padding:80px 10%;
+}
+
+.numeros{
+    display:flex;
+    justify-content:space-around;
+    text-align:center;
+}
+
+.numero h3{
+    font-size:3rem;
+    color:#39a845;
+}
+
+.cards{
+    display:flex;
+    gap:30px;
+}
+
+.card{
+    flex:1;
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,.1);
+    transition:.4s;
+}
+
+.card:hover{
+    transform:translateY(-15px);
+}
+
+.card i{
+    font-size:3rem;
+    color:#39a845;
+    margin-bottom:15px;
+}
+
+.linha{
+    background:#ddd;
+    margin:20px 0;
+    border-radius:20px;
+}
+
+.barra{
+    height:30px;
+    border-radius:20px;
+}
+
+.barra1{
+    width:90%;
+    background:#39a845;
+}
+
+.barra2{
+    width:80%;
+    background:#4caf50;
+}
+
+.barra3{
+    width:95%;
+    background:#2e7d32;
+}
+
+footer{
+    background:#111;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+.fade{
+    opacity:0;
+    transform:translateY(50px);
+    transition:1s;
+}
+
+.fade.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+@media(max-width:768px){
+
+    .cards,
+    .numeros{
+        flex-direction:column;
+        gap:20px;
+    }
+
+    .hero h1{
+        font-size:2.5rem;
+    }
+
+}
