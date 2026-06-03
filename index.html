@@ -1,10 +1,114 @@
-<section class="hero">
-    <div class="overlay">
-        <h1>Transformando o Futuro Digital do Paraná</h1>
-        <p>Inovação, tecnologia e inteligência para conectar pessoas e negócios.</p>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agrinho 2026 - Agro Forte, Futuro Sustentável</title>
 
-        <a href="#" class="btn-primary">
-            Explorar Plataforma
-        </a>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>AGRINHO 2026</h1>
+    <p>Agro Forte • Futuro Sustentável • Equilíbrio</p>
+
+    <nav>
+        <a href="#inicio">Início</a>
+        <a href="#agro">Agro</a>
+        <a href="#sustentabilidade">Sustentabilidade</a>
+        <a href="#tecnologia">Tecnologia</a>
+        <a href="#biodiversidade">Biodiversidade</a>
+        <a href="#quiz">Quiz</a>
+        <a href="#contato">Contato</a>
+    </nav>
+</header>
+
+<section id="inicio" class="hero">
+    <h2>AGRO FORTE, FUTURO SUSTENTÁVEL</h2>
+    <p>Produzir alimentos e preservar a natureza caminham juntos.</p>
+</section>
+
+<section id="agro" class="card">
+    <h2>🌾 O Agro no Brasil</h2>
+    <p>
+        O agronegócio é responsável por alimentar milhões de pessoas no mundo,
+        sendo essencial para a economia e desenvolvimento sustentável.
+    </p>
+
+    <div class="grid">
+        <div class="box">Soja</div>
+        <div class="box">Milho</div>
+        <div class="box">Trigo</div>
+        <div class="box">Pecuária</div>
     </div>
 </section>
+
+<section id="sustentabilidade" class="card green">
+    <h2>🌱 Sustentabilidade</h2>
+    <p>
+        O equilíbrio entre produção e preservação garante um futuro melhor.
+    </p>
+
+    <ul>
+        <li>Preservação das nascentes</li>
+        <li>Reflorestamento</li>
+        <li>Uso consciente do solo</li>
+        <li>Redução de agrotóxicos</li>
+    </ul>
+</section>
+
+<section id="tecnologia" class="card blue">
+    <h2>🚜 Tecnologia no Campo</h2>
+
+    <div class="grid">
+        <div class="box">Drones</div>
+        <div class="box">IA no campo</div>
+        <div class="box">Satélites</div>
+        <div class="box">Irrigação inteligente</div>
+    </div>
+</section>
+
+<section id="biodiversidade" class="card">
+    <h2>🌳 Biodiversidade</h2>
+    <p>
+        A fauna e flora são essenciais para manter o equilíbrio ambiental.
+    </p>
+
+    <div class="grid">
+        <div class="box">Animais</div>
+        <div class="box">Florestas</div>
+        <div class="box">Rios</div>
+        <div class="box">Polinizadores</div>
+    </div>
+</section>
+
+<section id="quiz" class="card dark">
+    <h2>🧠 Quiz Sustentável</h2>
+
+    <p>O que significa agricultura sustentável?</p>
+
+    <button onclick="resposta(true)">Preservar e produzir juntos</button>
+    <button onclick="resposta(false)">Desmatar tudo</button>
+
+    <p id="resultado"></p>
+</section>
+
+<section id="contato" class="card">
+    <h2>📩 Contato</h2>
+
+    <input type="text" placeholder="Seu nome">
+    <input type="email" placeholder="Seu e-mail">
+    <textarea placeholder="Mensagem"></textarea>
+
+    <button>Enviar</button>
+</section>
+
+<footer>
+    <p>AGRINHO 2026 - Agro e Sustentabilidade 🌱</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
