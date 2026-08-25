@@ -1,198 +1,675 @@
-/* =========================================================
-   MENU MOBILE
-========================================================= */
+/* =====================================
+   OPTIBOT
+   JAVASCRIPT PRINCIPAL
+===================================== */
 
-const menuMobile = document.getElementById("menuMobile");
-const nav = document.querySelector(".nav");
 
-menuMobile.addEventListener("click", () => {
+/* =====================================
+   PARTÍCULAS NO FUNDO
+===================================== */
 
-    nav.classList.toggle("active");
+const canvas = document.getElementById("particles");
+
+const ctx = canvas.getContext("2d");
+
+
+function resizeCanvas() {
+
+    canvas.width = window.innerWidth;
+
+    canvas.height = window.innerHeight;
+
+}
+
+
+resizeCanvas();
+
+
+window.addEventListener("resize", resizeCanvas);
+
+
+const particles = [];
+
+
+for (let i = 0; i < 80; i++) {
+
+    particles.push({
+
+        x: Math.random() * window.innerWidth,
+
+        y: Math.random() * window.innerHeight,
+
+        size: Math.random() * 3 + 1,
+
+        speedX: Math.random() - 0.5,
+
+        speedY: Math.random() - 0.5
+
+    });
+
+}
+
+
+function animateParticles() {
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    particles.forEach(particle => {
+
+        ctx.beginPath();
+
+        ctx.arc(
+            particle.x,
+            particle.y,
+            particle.size,
+            0,
+            Math.PI * 2
+        );
+
+
+        ctx.fillStyle =
+            "rgba(0, 217, 255, 0.5)";
+
+
+        ctx.fill();
+
+
+        particle.x += particle.speedX;
+
+        particle.y += particle.speedY;
+
+
+        if (
+            particle.x < 0 ||
+            particle.x > canvas.width
+        ) {
+
+            particle.speedX *= -1;
+
+        }
+
+
+        if (
+            particle.y < 0 ||
+            particle.y > canvas.height
+        ) {
+
+            particle.speedY *= -1;
+
+        }
+
+    });
+
+
+    requestAnimationFrame(animateParticles);
+
+}
+
+
+animateParticles();
+
+
+
+/* =====================================
+   CONTADOR ANIMADO
+===================================== */
+
+const counters =
+    document.querySelectorAll(".counter");
+
+
+counters.forEach(counter => {
+
+    const target =
+        Number(counter.dataset.target);
+
+
+    let count = 0;
+
+
+    const updateCounter = () => {
+
+        const increment =
+            Math.ceil(target / 80);
+
+
+        count += increment;
+
+
+        if (count < target) {
+
+            counter.textContent = count;
+
+            requestAnimationFrame(updateCounter);
+
+        }
+
+        else {
+
+            counter.textContent = target;
+
+        }
+
+    };
+
+
+    updateCounter();
 
 });
 
 
-/* =========================================================
-   LABORATÓRIO — SENSOR ÓPTICO
-========================================================= */
 
-const lightRange = document.getElementById("lightRange");
-const lightValue = document.getElementById("lightValue");
-const sensorStatus = document.getElementById("sensorStatus");
-const statusDot = document.getElementById("statusDot");
-const laser = document.querySelector(".laser");
-const sensorLight = document.querySelector(".sensor-light");
-const labRobot = document.querySelector(".lab-robot");
+/* =====================================
+   ROBÔ CONTROLÁVEL
+===================================== */
 
-function updateSensor() {
-
-    const value = Number(lightRange.value);
-
-    lightValue.textContent = value + "%";
+const robot =
+    document.getElementById("mini-robot");
 
 
-    /*
-        Quanto maior a luminosidade,
-        mais intensa fica a representação visual.
-    */
-
-    const intensity = 0.2 + (value / 100) * 1;
-
-    laser.style.opacity = intensity;
-
-    sensorLight.style.opacity = intensity;
+const world =
+    document.getElementById("robot-world");
 
 
-    /*
-        Simulação da lógica do robô
-    */
+const message =
+    document.getElementById("robot-message");
 
-    if (value < 30) {
 
-        sensorStatus.textContent =
-            "Pouca luz detectada — robô parado.";
+let robotX = 20;
 
-        statusDot.style.background = "#ef4444";
+let robotY = 20;
 
-        labRobot.style.transform = "translateX(0px)";
+const speed = 20;
+
+
+function moveRobot(x, y) {
+
+    robotX += x;
+
+    robotY += y;
+
+
+    const maxX =
+        world.clientWidth - robot.clientWidth;
+
+
+    const maxY =
+        world.clientHeight - robot.clientHeight;
+
+
+    robotX =
+        Math.max(
+            0,
+            Math.min(robotX, maxX)
+        );
+
+
+    robotY =
+        Math.max(
+            0,
+            Math.min(robotY, maxY)
+        );
+
+
+    robot.style.left =
+        robotX + "px";
+
+
+    robot.style.top =
+        robotY + "px";
+
+
+    checkGoal();
+
+}
+
+
+
+document
+    .getElementById("up")
+    .addEventListener(
+        "click",
+        () => moveRobot(0, -speed)
+    );
+
+
+document
+    .getElementById("down")
+    .addEventListener(
+        "click",
+        () => moveRobot(0, speed)
+    );
+
+
+document
+    .getElementById("left")
+    .addEventListener(
+        "click",
+        () => moveRobot(-speed, 0)
+    );
+
+
+document
+    .getElementById("right")
+    .addEventListener(
+        "click",
+        () => moveRobot(speed, 0)
+    );
+
+
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key === "ArrowUp"
+        ) {
+            moveRobot(0, -speed);
+        }
+
+
+        if (
+            event.key === "ArrowDown"
+        ) {
+            moveRobot(0, speed);
+        }
+
+
+        if (
+            event.key === "ArrowLeft"
+        ) {
+            moveRobot(-speed, 0);
+        }
+
+
+        if (
+            event.key === "ArrowRight"
+        ) {
+            moveRobot(speed, 0);
+        }
 
     }
+);
 
-    else if (value < 70) {
 
-        sensorStatus.textContent =
-            "Luminosidade intermediária — sensor analisando.";
 
-        statusDot.style.background = "#facc15";
+function checkGoal() {
 
-        labRobot.style.transform = "translateX(30px)";
+    const target =
+        document.getElementById("target");
 
-    }
 
-    else {
+    const robotRect =
+        robot.getBoundingClientRect();
 
-        sensorStatus.textContent =
-            "Muita luz detectada — robô avançando.";
 
-        statusDot.style.background = "#22c55e";
+    const targetRect =
+        target.getBoundingClientRect();
 
-        labRobot.style.transform = "translateX(100px)";
+
+    const distanceX =
+        Math.abs(
+            robotRect.left -
+            targetRect.left
+        );
+
+
+    const distanceY =
+        Math.abs(
+            robotRect.top -
+            targetRect.top
+        );
+
+
+    if (
+        distanceX < 50 &&
+        distanceY < 50
+    ) {
+
+        message.textContent =
+            "🎉 MISSÃO CUMPRIDA! Você encontrou o alvo!";
 
     }
 
 }
 
 
-lightRange.addEventListener(
-    "input",
-    updateSensor
-);
+
+/* =====================================
+   EDITOR DE CÓDIGO
+===================================== */
+
+const runCode =
+    document.getElementById("run-code");
 
 
-/* =========================================================
-   BOTÃO DE SIMULAÇÃO
-========================================================= */
+const codeInput =
+    document.getElementById("code-input");
 
-const simulateBtn =
-    document.getElementById("simulateBtn");
 
-simulateBtn.addEventListener("click", () => {
+const output =
+    document.getElementById("code-output");
 
-    let value = 0;
 
-    const interval = setInterval(() => {
+runCode.addEventListener(
+    "click",
+    () => {
 
-        value += 5;
+        const code =
+            codeInput.value;
 
-        lightRange.value = value;
 
-        updateSensor();
+        let logs = [];
 
-        if (value >= 100) {
 
-            clearInterval(interval);
+        const originalConsole =
+            console.log;
+
+
+        console.log =
+            function(message) {
+
+                logs.push(message);
+
+            };
+
+
+        try {
+
+            eval(code);
+
+
+            if (logs.length === 0) {
+
+                output.innerHTML =
+                    "> Código executado com sucesso.";
+
+            }
+
+            else {
+
+                output.innerHTML =
+                    logs
+                        .map(
+                            item =>
+                                "> " + item
+                        )
+                        .join("<br>");
+
+            }
 
         }
 
-    }, 80);
+        catch (error) {
+
+            output.innerHTML =
+                "> ERRO: " +
+                error.message;
+
+        }
+
+
+        console.log =
+            originalConsole;
+
+    }
+);
+
+
+
+/* =====================================
+   SIMULADOR DE LUZ
+===================================== */
+
+const lightButtons =
+    document.querySelectorAll(".light-btn");
+
+
+const lightBeam =
+    document.getElementById("light-beam");
+
+
+lightButtons.forEach(button => {
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            const color =
+                button.dataset.color;
+
+
+            if (
+                color === "rainbow"
+            ) {
+
+                lightBeam.style.background =
+                    "linear-gradient(90deg, red, orange, yellow, lime, cyan, blue, violet)";
+
+            }
+
+            else {
+
+                lightBeam.style.background =
+                    color;
+
+            }
+
+
+            lightBeam.style.opacity =
+                "0.9";
+
+        }
+    );
 
 });
 
 
-/* =========================================================
+
+/* =====================================
+   PRISMA
+===================================== */
+
+const prismButton =
+    document.getElementById("prism-btn");
+
+
+const rainbowBeam =
+    document.getElementById("rainbow-beam");
+
+
+prismButton.addEventListener(
+    "click",
+    () => {
+
+        rainbowBeam.classList.toggle(
+            "active"
+        );
+
+
+        if (
+            rainbowBeam.classList.contains("active")
+        ) {
+
+            prismButton.innerHTML =
+                "🌈 PRISMA ATIVADO";
+
+        }
+
+        else {
+
+            prismButton.innerHTML =
+                "✨ ATIVAR PRISMA";
+
+        }
+
+    }
+);
+
+
+
+/* =====================================
+   REFLEXÃO
+===================================== */
+
+const slider =
+    document.getElementById(
+        "reflection-slider"
+    );
+
+
+const incidentRay =
+    document.getElementById(
+        "incident-ray"
+    );
+
+
+const reflectedRay =
+    document.getElementById(
+        "reflected-ray"
+    );
+
+
+slider.addEventListener(
+    "input",
+    () => {
+
+        const angle =
+            slider.value;
+
+
+        incidentRay.style.transform =
+            `rotate(${-angle}deg)`;
+
+
+        reflectedRay.style.transform =
+            `rotate(${angle}deg)`;
+
+    }
+);
+
+
+
+/* =====================================
    QUIZ
-========================================================= */
+===================================== */
 
 const questions = [
 
     {
+
         question:
-            "Qual área é responsável por estudar a luz?",
+            "O que um sensor permite que um robô faça?",
 
         answers: [
-            "Robótica",
-            "Óptica",
-            "Programação",
-            "Mecânica"
+
+            "Sentir o ambiente",
+
+            "Virar um ser humano",
+
+            "Parar de funcionar",
+
+            "Comer energia"
+
         ],
 
-        correct: 1
+        correct: 0
+
     },
 
+
     {
+
         question:
-            "Qual elemento pode detectar informações do ambiente?",
+            "Qual linguagem é muito utilizada para criar páginas web?",
 
         answers: [
-            "Sensor",
-            "Parafuso",
-            "Gabinete",
+
+            "HTML",
+
+            "Bateria",
+
+            "Laser",
+
+            "Motor"
+
+        ],
+
+        correct: 0
+
+    },
+
+
+    {
+
+        question:
+            "O que acontece na refração?",
+
+        answers: [
+
+            "A luz muda de direção",
+
+            "A luz desaparece",
+
+            "O robô para",
+
+            "O computador explode"
+
+        ],
+
+        correct: 0
+
+    },
+
+
+    {
+
+        question:
+            "Qual componente pode movimentar um robô?",
+
+        answers: [
+
+            "Motor",
+
+            "Espelho",
+
+            "Monitor",
+
             "Teclado"
+
         ],
 
         correct: 0
+
     },
 
+
     {
+
         question:
-            "O que transforma instruções em ações para o robô?",
+            "Quais são os três temas do OPTIBOT?",
 
         answers: [
-            "Código",
-            "Luz solar",
-            "Plástico",
-            "Bateria"
+
+            "Robótica, Programação e Óptica",
+
+            "Biologia, História e Música",
+
+            "Comida, Moda e Jogos",
+
+            "Matemática, Futebol e Cinema"
+
         ],
 
         correct: 0
-    },
 
-    {
-        question:
-            "Qual fenômeno está relacionado ao desvio da luz ao passar de um meio para outro?",
-
-        answers: [
-            "Refração",
-            "Gravidade",
-            "Eletrização",
-            "Combustão"
-        ],
-
-        correct: 0
-    },
-
-    {
-        question:
-            "Qual combinação representa o conceito do OPTIBOT?",
-
-        answers: [
-            "Música + Arte + História",
-            "Robótica + Programação + Óptica",
-            "Matemática + Esporte + Música",
-            "Química + Biologia + Geografia"
-        ],
-
-        correct: 1
     }
 
 ];
@@ -202,213 +679,268 @@ let currentQuestion = 0;
 
 let score = 0;
 
+let answered = false;
+
 
 const questionElement =
     document.getElementById("question");
 
-const answerButtons =
-    document.querySelectorAll(".answer");
 
-const questionNumber =
-    document.getElementById("questionNumber");
+const answersElement =
+    document.getElementById("answers");
 
-const progressBar =
-    document.getElementById("progressBar");
 
-const quizResult =
-    document.getElementById("quizResult");
+const resultElement =
+    document.getElementById("quiz-result");
+
+
+const progressElement =
+    document.getElementById("quiz-progress");
+
+
+const nextButton =
+    document.getElementById("next-question");
+
 
 
 function loadQuestion() {
 
-    const current =
+    answered = false;
+
+
+    const question =
         questions[currentQuestion];
 
 
+    progressElement.textContent =
+        `Pergunta ${currentQuestion + 1} de ${questions.length}`;
+
+
     questionElement.textContent =
-        current.question;
+        question.question;
 
 
-    questionNumber.textContent =
-        `PERGUNTA ${currentQuestion + 1}/${questions.length}`;
+    answersElement.innerHTML = "";
 
 
-    progressBar.style.width =
-        `${((currentQuestion + 1) / questions.length) * 100}%`;
+    question.answers.forEach(
+        (answer, index) => {
+
+            const button =
+                document.createElement("button");
 
 
-    answerButtons.forEach((button, index) => {
-
-        button.textContent =
-            current.answers[index];
-
-        button.disabled = false;
-
-        button.style.opacity = "1";
-
-    });
+            button.textContent =
+                answer;
 
 
-    quizResult.textContent = "";
+            button.addEventListener(
+                "click",
+                () => selectAnswer(index)
+            );
+
+
+            answersElement.appendChild(
+                button
+            );
+
+        }
+    );
+
+
+    resultElement.textContent = "";
 
 }
 
 
-answerButtons.forEach((button, index) => {
+function selectAnswer(index) {
 
-    button.addEventListener("click", () => {
-
-        const current =
-            questions[currentQuestion];
+    if (answered) return;
 
 
-        answerButtons.forEach(btn => {
-
-            btn.disabled = true;
-
-        });
+    answered = true;
 
 
-        if (index === current.correct) {
+    const correct =
+        questions[currentQuestion].correct;
 
-            score++;
 
-            quizResult.textContent =
-                "🚀 CORRETO! Você mandou muito bem!";
+    const buttons =
+        answersElement.querySelectorAll(
+            "button"
+        );
 
-            quizResult.style.color =
-                "#22c55e";
+
+    buttons.forEach(
+        (button, buttonIndex) => {
+
+            if (
+                buttonIndex === correct
+            ) {
+
+                button.classList.add(
+                    "correct"
+                );
+
+            }
+
+            if (
+                buttonIndex === index &&
+                index !== correct
+            ) {
+
+                button.classList.add(
+                    "wrong"
+                );
+
+            }
+
+        }
+    );
+
+
+    if (index === correct) {
+
+        score++;
+
+
+        resultElement.textContent =
+            "🎉 CORRETO! Muito bem!";
+
+    }
+
+    else {
+
+        resultElement.textContent =
+            "❌ Quase! Continue tentando.";
+
+    }
+
+}
+
+
+nextButton.addEventListener(
+    "click",
+    () => {
+
+        if (!answered) {
+
+            resultElement.textContent =
+                "Escolha uma resposta primeiro!";
+
+            return;
+
+        }
+
+
+        currentQuestion++;
+
+
+        if (
+            currentQuestion <
+            questions.length
+        ) {
+
+            loadQuestion();
 
         }
 
         else {
 
-            quizResult.textContent =
-                "💡 Quase! Continue tentando.";
+            questionElement.textContent =
+                "QUIZ FINALIZADO!";
 
-            quizResult.style.color =
-                "#facc15";
+
+            answersElement.innerHTML =
+                `Você acertou ${score} de ${questions.length} perguntas! 🚀`;
+
+
+            resultElement.innerHTML =
+                score >= 4
+                    ? "🏆 Você é um mestre da tecnologia!"
+                    : "🤖 Continue estudando e tente novamente!";
+
+
+            nextButton.textContent =
+                "RECOMEÇAR";
+
+
+            nextButton.onclick =
+                () => {
+
+                    currentQuestion = 0;
+
+                    score = 0;
+
+                    nextButton.textContent =
+                        "PRÓXIMA";
+
+                    loadQuestion();
+
+                };
 
         }
 
-
-        setTimeout(() => {
-
-            currentQuestion++;
-
-
-            if (currentQuestion < questions.length) {
-
-                loadQuestion();
-
-            }
-
-            else {
-
-                finishQuiz();
-
-            }
-
-        }, 1200);
-
-    });
-
-});
-
-
-function finishQuiz() {
-
-    questionElement.textContent =
-        "🎉 DESAFIO CONCLUÍDO!";
-
-
-    document.querySelector(".answers").innerHTML = "";
-
-
-    questionNumber.textContent =
-        "RESULTADO FINAL";
-
-
-    progressBar.style.width = "100%";
-
-
-    quizResult.innerHTML = `
-        Você acertou <strong>${score}</strong>
-        de <strong>${questions.length}</strong> perguntas!<br><br>
-
-        ${
-            score === questions.length
-                ? "🏆 PERFEITO! Você é praticamente um engenheiro do futuro!"
-                : "🚀 Continue estudando. O conhecimento é o combustível da inovação!"
-        }
-    `;
-
-}
+    }
+);
 
 
 loadQuestion();
 
 
-/* =========================================================
-   BOTÃO FINAL
-========================================================= */
 
-const startBtn =
-    document.getElementById("startBtn");
+/* =====================================
+   MENU MOBILE
+===================================== */
 
-startBtn.addEventListener("click", () => {
-
-    document
-        .getElementById("laboratorio")
-        .scrollIntoView({
-            behavior: "smooth"
-        });
-
-});
+const menuButton =
+    document.getElementById("menu-btn");
 
 
-/* =========================================================
-   ANIMAÇÃO AO APARECER NA TELA
-========================================================= */
+const navbar =
+    document.querySelector(".navbar");
 
-const observer =
-    new IntersectionObserver(
-        entries => {
 
-            entries.forEach(entry => {
+menuButton.addEventListener(
+    "click",
+    () => {
 
-                if (entry.isIntersecting) {
+        if (
+            navbar.style.display === "flex"
+        ) {
 
-                    entry.target.style.opacity = "1";
+            navbar.style.display =
+                "none";
 
-                    entry.target.style.transform =
-                        "translateY(0)";
-
-                }
-
-            });
-
-        },
-        {
-            threshold: 0.15
         }
-    );
 
+        else {
 
-document
-    .querySelectorAll(
-        ".tech-card, .connection-card, .quiz-box, .code-window"
-    )
-    .forEach(element => {
+            navbar.style.display =
+                "flex";
 
-        element.style.opacity = "0";
+            navbar.style.flexDirection =
+                "column";
 
-        element.style.transform =
-            "translateY(40px)";
+            navbar.style.position =
+                "absolute";
 
-        element.style.transition =
-            "opacity .8s ease, transform .8s ease";
+            navbar.style.top =
+                "75px";
 
-        observer.observe(element);
+            navbar.style.right =
+                "20px";
 
-    });
+            navbar.style.padding =
+                "20px";
+
+            navbar.style.background =
+                "#111122";
+
+            navbar.style.borderRadius =
+                "15px";
+
+        }
+
+    }
+);
