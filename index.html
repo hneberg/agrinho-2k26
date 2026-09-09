@@ -5,9 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>VISIO | A Viagem da Visão</title>
+    <title>LUMINA | A Viagem da Luz</title>
+
+    <meta name="description"
+        content="LUMINA - Uma viagem interativa pelo mundo da óptica física.">
 
     <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap"
@@ -16,534 +22,600 @@
 
 <body>
 
+    <!-- PARTICULAS -->
+    <canvas id="particles"></canvas>
+
     <!-- ================= HEADER ================= -->
 
-    <header>
+    <header class="header">
 
         <div class="logo">
-            👁️ <span>VISIO</span>
+            <span class="logo-symbol">✦</span>
+            LUMINA
         </div>
 
-        <nav>
+        <nav class="nav">
+
             <a href="#inicio">Início</a>
-            <a href="#como-funciona">Como funciona</a>
-            <a href="#anatomia">Olho humano</a>
-            <a href="#curiosidades">Curiosidades</a>
+            <a href="#fenomenos">Fenômenos</a>
+            <a href="#experiencia">Experiência</a>
+            <a href="#videos">Vídeos</a>
             <a href="#quiz">Quiz</a>
+
         </nav>
 
-        <button id="themeButton">🌙</button>
+        <div class="header-buttons">
+
+            <button id="themeButton" class="theme-button">
+                🌙
+            </button>
+
+        </div>
 
     </header>
 
 
     <!-- ================= HERO ================= -->
 
-    <section id="inicio" class="hero">
+    <main>
 
-        <div class="hero-content">
+        <section id="inicio" class="hero">
 
-            <span class="tag">CIÊNCIA • BIOLOGIA • ÓPTICA</span>
+            <div class="hero-content">
 
-            <h1>
-                COMO
-                <span>A VISÃO</span>
-                FUNCIONA?
-            </h1>
+                <div class="badge">
+                    🔬 ÓPTICA FÍSICA • ENSINO MÉDIO
+                </div>
 
-            <p>
-                Você olha para o mundo todos os dias...
-                mas já parou para pensar em como seu cérebro
-                transforma luz em imagens?
-            </p>
+                <h1>
+                    A luz é muito mais
+                    <span>do que você imagina.</span>
+                </h1>
 
-            <div class="hero-buttons">
+                <p class="hero-text">
 
-                <a href="#como-funciona" class="main-button">
-                    🚀 Começar a viagem
-                </a>
+                    Entre ondas, cores, reflexos e fenômenos invisíveis,
+                    existe um universo inteiro acontecendo na velocidade da luz.
 
-                <button class="secondary-button" id="surpriseButton">
-                    ✨ Me surpreenda
-                </button>
+                </p>
 
-            </div>
+                <div class="hero-buttons">
 
-        </div>
+                    <a href="#fenomenos" class="btn primary">
+                        Explorar a luz →
+                    </a>
 
-
-        <div class="eye-animation">
-
-            <div class="eye">
-
-                <div class="iris">
-
-                    <div class="pupil"></div>
+                    <a href="#experiencia" class="btn secondary">
+                        Fazer experiência 🧪
+                    </a>
 
                 </div>
 
             </div>
 
-            <div class="orbit orbit1"></div>
-            <div class="orbit orbit2"></div>
 
-        </div>
+            <!-- ANIMAÇÃO PRINCIPAL -->
 
-    </section>
+            <div class="light-animation">
 
+                <div class="sun-core"></div>
 
-    <!-- ================= INTRO ================= -->
+                <div class="orbit orbit-1"></div>
+                <div class="orbit orbit-2"></div>
+                <div class="orbit orbit-3"></div>
 
-    <section class="intro">
+                <div class="light-ray ray-1"></div>
+                <div class="light-ray ray-2"></div>
+                <div class="light-ray ray-3"></div>
 
-        <span class="section-tag">01 — PRIMEIRO PASSO</span>
-
-        <h2>
-            Tudo começa com
-            <span>a luz.</span>
-        </h2>
-
-        <p>
-            A visão começa quando a luz refletida pelos objetos
-            entra nos nossos olhos. O olho organiza essa informação
-            e a retina transforma a luz em sinais elétricos que
-            seguem até o cérebro.
-        </p>
-
-        <div class="process">
-
-            <div class="process-item">
-                <strong>01</strong>
-                <span>💡 Luz</span>
             </div>
 
-            <div class="arrow">→</div>
+        </section>
 
-            <div class="process-item">
-                <strong>02</strong>
-                <span>👁️ Olho</span>
+
+        <!-- ================= INTRO ================= -->
+
+        <section class="intro">
+
+            <div class="section-title">
+
+                <span>01 — COMEÇANDO</span>
+
+                <h2>
+                    Afinal, o que é <strong>luz?</strong>
+                </h2>
+
             </div>
 
-            <div class="arrow">→</div>
+            <div class="intro-grid">
 
-            <div class="process-item">
-                <strong>03</strong>
-                <span>⚡ Sinais</span>
-            </div>
-
-            <div class="arrow">→</div>
-
-            <div class="process-item">
-                <strong>04</strong>
-                <span>🧠 Cérebro</span>
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================= COMO FUNCIONA ================= -->
-
-    <section id="como-funciona" class="section">
-
-        <span class="section-tag">02 — A VIAGEM DA LUZ</span>
-
-        <h2>
-            A incrível viagem
-            <span>até o cérebro</span>
-        </h2>
-
-        <div class="timeline">
-
-            <div class="timeline-card">
-
-                <div class="number">01</div>
-
-                <div>
-                    <h3>💎 Córnea</h3>
+                <div class="intro-text">
 
                     <p>
-                        É a camada transparente na parte da frente
-                        do olho. Ela ajuda a desviar e focalizar
-                        a luz que entra.
+                        A luz é uma forma de radiação eletromagnética capaz
+                        de transportar energia através do espaço.
                     </p>
-                </div>
-
-            </div>
-
-
-            <div class="timeline-card">
-
-                <div class="number">02</div>
-
-                <div>
-                    <h3>🟣 Pupila</h3>
 
                     <p>
-                        É a abertura no centro da íris.
-                        Ela controla quanta luz entra no olho.
+                        Ela pode apresentar comportamentos diferentes,
+                        dependendo da situação. Pode ser refletida,
+                        refratada, dispersada, difratada e interferir
+                        com outras ondas.
                     </p>
+
+                    <div class="highlight">
+
+                        💡 <strong>Curiosidade:</strong>
+
+                        A luz no vácuo viaja a aproximadamente
+                        <strong>300.000 km/s.</strong>
+
+                    </div>
+
                 </div>
 
-            </div>
+                <div class="speed-card">
 
+                    <div class="speed-number">
+                        299.792
+                    </div>
 
-            <div class="timeline-card">
+                    <div class="speed-unit">
+                        km/s
+                    </div>
 
-                <div class="number">03</div>
+                    <div class="speed-label">
+                        VELOCIDADE DA LUZ NO VÁCUO
+                    </div>
 
-                <div>
-                    <h3>🔍 Cristalino</h3>
-
-                    <p>
-                        Ajuda a focalizar a luz para que a imagem
-                        fique projetada corretamente na retina.
-                    </p>
-                </div>
-
-            </div>
-
-
-            <div class="timeline-card">
-
-                <div class="number">04</div>
-
-                <div>
-                    <h3>⚡ Retina</h3>
-
-                    <p>
-                        Possui células sensíveis à luz que transformam
-                        a informação luminosa em sinais elétricos.
-                    </p>
-                </div>
-
-            </div>
-
-
-            <div class="timeline-card">
-
-                <div class="number">05</div>
-
-                <div>
-                    <h3>🧠 Nervo óptico</h3>
-
-                    <p>
-                        Transporta informações da retina para
-                        regiões do cérebro envolvidas com a visão.
-                    </p>
-                </div>
-
-            </div>
-
-
-            <div class="timeline-card">
-
-                <div class="number">06</div>
-
-                <div>
-                    <h3>🌎 Cérebro</h3>
-
-                    <p>
-                        O cérebro processa os sinais recebidos
-                        e constrói aquilo que percebemos como imagem.
-                    </p>
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================= ANATOMIA ================= -->
-
-    <section id="anatomia" class="anatomy-section">
-
-        <span class="section-tag">03 — POR DENTRO DO OLHO</span>
-
-        <h2>
-            Conheça a
-            <span>máquina da visão</span>
-        </h2>
-
-        <div class="anatomy-container">
-
-            <div class="eye-diagram">
-
-                <div class="diagram-eye">
-
-                    <div class="diagram-iris"></div>
-
-                    <div class="diagram-pupil"></div>
-
-                    <div class="lens"></div>
-
-                    <div class="retina"></div>
+                    <div class="speed-line"></div>
 
                 </div>
 
             </div>
 
-
-            <div class="parts">
-
-                <button class="part" data-part="cornea">
-                    <b>💎 Córnea</b>
-                    <span>Proteção e focalização</span>
-                </button>
-
-                <button class="part" data-part="iris">
-                    <b>🎨 Íris</b>
-                    <span>Controla a entrada de luz</span>
-                </button>
-
-                <button class="part" data-part="lens">
-                    <b>🔍 Cristalino</b>
-                    <span>Ajuda a focalizar</span>
-                </button>
-
-                <button class="part" data-part="retina">
-                    <b>⚡ Retina</b>
-                    <span>Detecta a luz</span>
-                </button>
-
-                <button class="part" data-part="nerve">
-                    <b>🧠 Nervo óptico</b>
-                    <span>Leva informações ao cérebro</span>
-                </button>
-
-            </div>
-
-        </div>
-
-        <div id="partInfo" class="part-info">
-
-            👆 Clique em uma parte do olho para descobrir mais!
-
-        </div>
-
-    </section>
+        </section>
 
 
-    <!-- ================= FATO ================= -->
+        <!-- ================= FENÔMENOS ================= -->
 
-    <section class="fact">
+        <section id="fenomenos" class="phenomena">
 
-        <div class="fact-content">
+            <div class="section-title center">
 
-            <span>🤯 VOCÊ SABIA?</span>
+                <span>02 — FENÔMENOS</span>
 
-            <h2 id="factText">
-                Você pisca cerca de 15 a 20 vezes por minuto.
-            </h2>
-
-            <button id="factButton">
-                Quero outro fato!
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================= VÍDEOS ================= -->
-
-    <section class="section videos">
-
-        <span class="section-tag">04 — APRENDA VISUALMENTE</span>
-
-        <h2>
-            Veja a visão
-            <span>acontecendo</span>
-        </h2>
-
-        <div class="video-grid">
-
-            <div class="video-card">
-
-                <div class="video-wrapper">
-
-                    <iframe
-                        src="https://www.youtube.com/embed/xH7RtBCAwzo"
-                        title="Animação da retina"
-                        allowfullscreen>
-                    </iframe>
-
-                </div>
-
-                <h3>🔬 A retina em ação</h3>
+                <h2>
+                    A luz pode fazer
+                    <strong>coisas incríveis.</strong>
+                </h2>
 
                 <p>
-                    Uma animação mostrando a estrutura da retina
-                    e seus componentes.
+                    Clique nos cartões para descobrir como cada fenômeno funciona.
                 </p>
 
             </div>
 
 
-            <div class="video-card">
+            <div class="cards">
 
-                <div class="video-wrapper">
+                <!-- CARD 1 -->
 
-                    <iframe
-                        src="https://www.youtube.com/embed/Hclc7lL_Oyw"
-                        title="Anatomia do olho"
-                        allowfullscreen>
-                    </iframe>
+                <article class="phenomenon-card"
+                    data-title="Dispersão"
+                    data-description="A dispersão acontece quando a luz branca é separada em diferentes cores. Um exemplo clássico é a passagem da luz por um prisma, formando um espectro de cores.">
+
+                    <div class="card-icon">
+                        🌈
+                    </div>
+
+                    <span class="card-number">
+                        01
+                    </span>
+
+                    <h3>
+                        Dispersão
+                    </h3>
+
+                    <p>
+                        Quando a luz branca revela suas cores.
+                    </p>
+
+                    <button class="learn-button">
+                        Descobrir →
+                    </button>
+
+                </article>
+
+
+                <!-- CARD 2 -->
+
+                <article class="phenomenon-card"
+                    data-title="Difração"
+                    data-description="A difração ocorre quando uma onda luminosa encontra uma abertura ou obstáculo e se espalha. O fenômeno mostra o comportamento ondulatório da luz.">
+
+                    <div class="card-icon">
+                        🌊
+                    </div>
+
+                    <span class="card-number">
+                        02
+                    </span>
+
+                    <h3>
+                        Difração
+                    </h3>
+
+                    <p>
+                        Quando a luz se espalha ao encontrar obstáculos.
+                    </p>
+
+                    <button class="learn-button">
+                        Descobrir →
+                    </button>
+
+                </article>
+
+
+                <!-- CARD 3 -->
+
+                <article class="phenomenon-card"
+                    data-title="Interferência"
+                    data-description="A interferência acontece quando duas ou mais ondas luminosas se sobrepõem. Elas podem se reforçar ou diminuir entre si.">
+
+                    <div class="card-icon">
+                        🌀
+                    </div>
+
+                    <span class="card-number">
+                        03
+                    </span>
+
+                    <h3>
+                        Interferência
+                    </h3>
+
+                    <p>
+                        Quando ondas de luz se encontram.
+                    </p>
+
+                    <button class="learn-button">
+                        Descobrir →
+                    </button>
+
+                </article>
+
+
+                <!-- CARD 4 -->
+
+                <article class="phenomenon-card"
+                    data-title="Polarização"
+                    data-description="A polarização restringe a direção de oscilação da onda luminosa. Ela está presente em tecnologias como óculos de sol polarizados e telas LCD.">
+
+                    <div class="card-icon">
+                        🕶️
+                    </div>
+
+                    <span class="card-number">
+                        04
+                    </span>
+
+                    <h3>
+                        Polarização
+                    </h3>
+
+                    <p>
+                        Quando selecionamos uma direção da luz.
+                    </p>
+
+                    <button class="learn-button">
+                        Descobrir →
+                    </button>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= PRISMA ================= -->
+
+        <section id="experiencia" class="experiment">
+
+            <div class="experiment-text">
+
+                <span class="section-label">
+                    03 — LABORATÓRIO VIRTUAL
+                </span>
+
+                <h2>
+                    Que tal <span>separar a luz?</span>
+                </h2>
+
+                <p>
+
+                    Mova o controle e veja uma representação
+                    interativa de como a luz branca pode ser
+                    separada em diferentes comprimentos de onda.
+
+                </p>
+
+                <div class="slider-area">
+
+                    <label>
+                        Intensidade da luz
+                    </label>
+
+                    <input
+                        type="range"
+                        id="lightSlider"
+                        min="0"
+                        max="100"
+                        value="70">
+
+                    <div class="slider-value">
+                        <span id="sliderValue">70</span>%
+                    </div>
 
                 </div>
 
-                <h3>👁️ Anatomia do olho</h3>
+            </div>
+
+
+            <div class="prism-lab">
+
+                <div class="laser"></div>
+
+                <div class="prism">
+
+                    <div class="prism-shine"></div>
+
+                </div>
+
+                <div class="spectrum">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= IMAGEM ================= -->
+
+        <section class="image-section">
+
+            <div class="image-content">
+
+                <span>
+                    A LUZ ESCONDE UM ARCO-ÍRIS
+                </span>
+
+                <h2>
+                    Branco não significa
+                    <strong>uma única cor.</strong>
+                </h2>
 
                 <p>
-                    Uma explicação visual sobre a anatomia
-                    e o funcionamento do olho humano.
+                    Um prisma pode separar a luz branca em diferentes
+                    componentes do espectro visível.
                 </p>
 
             </div>
 
-        </div>
+            <img
+                src="https://commons.wikimedia.org/wiki/Special:FilePath/Prisma%20e%20Decomposi%C3%A7%C3%A3o%20da%20luz.png"
+                alt="Prisma decompondo luz branca em cores">
 
-    </section>
+        </section>
 
 
-    <!-- ================= CURIOSIDADES ================= -->
+        <!-- ================= CURIOSIDADES ================= -->
 
-    <section id="curiosidades" class="section">
+        <section class="curiosities">
 
-        <span class="section-tag">05 — CURIOSIDADES</span>
+            <div class="section-title center">
 
-        <h2>
-            O olho humano é
-            <span>surpreendente</span>
-        </h2>
+                <span>04 — VOCÊ SABIA?</span>
 
-        <div class="curiosity-grid">
+                <h2>
+                    Pequenas coisas.
+                    <strong>Grandes fenômenos.</strong>
+                </h2>
 
-            <div class="curiosity">
-                <div class="emoji">👁️</div>
-                <h3>Milhões de informações</h3>
+            </div>
+
+
+            <div class="curiosity-grid">
+
+                <div class="curiosity">
+                    <div>🌈</div>
+                    <h3>Arco-íris</h3>
+                    <p>
+                        Envolve refração, reflexão interna e dispersão da luz.
+                    </p>
+                </div>
+
+                <div class="curiosity">
+                    <div>💿</div>
+                    <h3>CDs coloridos</h3>
+                    <p>
+                        As pequenas trilhas do disco podem produzir efeitos
+                        relacionados à difração.
+                    </p>
+                </div>
+
+                <div class="curiosity">
+                    <div>🕶️</div>
+                    <h3>Óculos polarizados</h3>
+                    <p>
+                        Podem reduzir reflexos indesejados em determinadas situações.
+                    </p>
+                </div>
+
+                <div class="curiosity">
+                    <div>🫧</div>
+                    <h3>Bolhas de sabão</h3>
+                    <p>
+                        Suas cores estão relacionadas à interferência em filmes finos.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= VIDEOS ================= -->
+
+        <section id="videos" class="videos">
+
+            <div class="section-title center">
+
+                <span>05 — ASSISTA</span>
+
+                <h2>
+                    Veja a física
+                    <strong>acontecendo.</strong>
+                </h2>
+
+            </div>
+
+
+            <div class="video-grid">
+
+                <div class="video-card">
+
+                    <div class="video-container">
+
+                        <iframe
+                            src="https://www.youtube.com/embed/edidweXxbqU"
+                            title="Interferência e Difração Explicadas"
+                            allowfullscreen>
+                        </iframe>
+
+                    </div>
+
+                    <h3>
+                        Interferência e Difração
+                    </h3>
+
+                    <p>
+                        Ciência Todo Dia
+                    </p>
+
+                </div>
+
+
+                <div class="video-card">
+
+                    <div class="video-container">
+
+                        <iframe
+                            src="https://www.youtube.com/embed/Yp4mQC69Zag"
+                            title="Interferência e Difração da Luz"
+                            allowfullscreen>
+                        </iframe>
+
+                    </div>
+
+                    <h3>
+                        Experimento de Física
+                    </h3>
+
+                    <p>
+                        Laboratório de Física Experimental Básica — UFMG
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= QUIZ ================= -->
+
+        <section id="quiz" class="quiz-section">
+
+            <div class="quiz-box">
+
+                <span>
+                    06 — DESAFIO LUMINA
+                </span>
+
+                <h2>
+                    Você realmente
+                    <strong>entendeu a luz?</strong>
+                </h2>
+
+                <div id="quiz">
+
+                    <div id="question">
+                        Clique em começar!
+                    </div>
+
+                    <div id="answers"></div>
+
+                    <button
+                        id="startQuiz"
+                        class="quiz-button">
+                        Começar quiz
+                    </button>
+
+                    <div
+                        id="score"
+                        class="score">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= ACESSIBILIDADE ================= -->
+
+        <section class="accessibility">
+
+            <div>
+
+                <span>
+                    ♿ ACESSIBILIDADE
+                </span>
+
+                <h2>
+                    Ciência deve ser
+                    <strong>para todo mundo.</strong>
+                </h2>
+
                 <p>
-                    A visão depende de uma enorme quantidade
-                    de processamento entre retina e cérebro.
+
+                    Este site possui integração com o VLibras,
+                    ferramenta que traduz conteúdos digitais em
+                    Português para Libras.
+
                 </p>
-            </div>
-
-
-            <div class="curiosity">
-                <div class="emoji">🌈</div>
-                <h3>As cores</h3>
-                <p>
-                    Células chamadas cones participam da percepção
-                    das cores e da visão detalhada.
-                </p>
-            </div>
-
-
-            <div class="curiosity">
-                <div class="emoji">🌙</div>
-                <h3>Visão no escuro</h3>
-                <p>
-                    Os bastonetes da retina são especialmente
-                    importantes em ambientes com pouca luz.
-                </p>
-            </div>
-
-
-            <div class="curiosity">
-                <div class="emoji">🧠</div>
-                <h3>O cérebro participa</h3>
-                <p>
-                    Enxergar não é simplesmente "tirar uma foto":
-                    o cérebro interpreta os sinais visuais.
-                </p>
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================= ILUSÃO ================= -->
-
-    <section class="illusion">
-
-        <span class="section-tag">06 — DESAFIO DO CÉREBRO</span>
-
-        <h2>
-            Você consegue
-            <span>enganar sua visão?</span>
-        </h2>
-
-        <p>
-            Observe a imagem abaixo por alguns segundos.
-            Depois clique no botão.
-        </p>
-
-        <div class="illusion-box">
-
-            <div class="illusion-circle"></div>
-
-            <div class="illusion-lines"></div>
-
-        </div>
-
-        <button id="illusionButton">
-            🌀 Ativar ilusão
-        </button>
-
-        <p id="illusionMessage"></p>
-
-    </section>
-
-
-    <!-- ================= QUIZ ================= -->
-
-    <section id="quiz" class="quiz-section">
-
-        <span class="section-tag">07 — TESTE SEU CÉREBRO</span>
-
-        <h2>
-            QUIZ DA
-            <span>VISÃO</span>
-        </h2>
-
-        <div class="quiz-box">
-
-            <div id="questionNumber">
-                Pergunta 1 de 5
-            </div>
-
-            <h3 id="question">
-                Qual parte do olho controla a quantidade de luz
-                que entra?
-            </h3>
-
-            <div id="answers">
-
-                <button class="answer">Retina</button>
-
-                <button class="answer">Íris</button>
-
-                <button class="answer">Nervo óptico</button>
-
-                <button class="answer">Cristalino</button>
 
             </div>
 
-            <div class="quiz-progress">
-
-                <div id="progress"></div>
-
+            <div class="accessibility-icon">
+                🤟
             </div>
 
-        </div>
+        </section>
 
-        <div id="quizResult"></div>
-
-    </section>
+    </main>
 
 
     <!-- ================= FOOTER ================= -->
@@ -551,20 +623,52 @@
     <footer>
 
         <div class="footer-logo">
-            👁️ VISIO
+            ✦ LUMINA
         </div>
 
         <p>
-            A ciência por trás daquilo que você vê.
+            Uma viagem pelo universo da óptica.
         </p>
 
         <div class="footer-line"></div>
 
-        <p class="credits">
-            Projeto educacional • Biologia • Óptica • Tecnologia
-        </p>
+        <small>
+            Projeto educacional • Física • Óptica
+        </small>
 
     </footer>
+
+
+    <!-- VOLTAR AO TOPO -->
+
+    <button
+        id="topButton"
+        class="top-button">
+        ↑
+    </button>
+
+
+    <!-- ================= VLibras ================= -->
+
+    <div vw class="enabled">
+
+        <div vw-access-button class="active"></div>
+
+        <div vw-plugin-wrapper>
+
+            <div class="vw-plugin-top-wrapper"></div>
+
+        </div>
+
+    </div>
+
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+
+    <script>
+        new window.VLibras.Widget({
+            rootPath: 'https://vlibras.gov.br/app'
+        });
+    </script>
 
 
     <script src="script.js"></script>

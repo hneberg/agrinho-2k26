@@ -1,270 +1,370 @@
-/* =========================================
-   BOTÃO MODO ESCURO / CLARO
-========================================= */
+/* ==================================
+   LUMINA
+   JAVASCRIPT
+================================== */
 
-const themeButton = document.getElementById("themeButton");
+
+/* ==================================
+   MODO ESCURO / CLARO
+================================== */
+
+const themeButton =
+    document.getElementById("themeButton");
+
+const savedTheme =
+    localStorage.getItem("lumina-theme");
+
+
+if (savedTheme === "light") {
+
+    document.body.classList.add("light");
+
+    themeButton.textContent = "☀️";
+
+}
+
 
 themeButton.addEventListener("click", () => {
 
     document.body.classList.toggle("light");
 
-    if (document.body.classList.contains("light")) {
+    const isLight =
+        document.body.classList.contains("light");
 
-        themeButton.textContent = "☀️";
+    themeButton.textContent =
+        isLight ? "☀️" : "🌙";
 
-    } else {
+    localStorage.setItem(
+        "lumina-theme",
+        isLight ? "light" : "dark"
+    );
 
-        themeButton.textContent = "🌙";
+});
+
+
+/* ==================================
+   PARTICULAS
+================================== */
+
+const canvas =
+    document.getElementById("particles");
+
+const ctx =
+    canvas.getContext("2d");
+
+let particles = [];
+
+
+function resizeCanvas() {
+
+    canvas.width =
+        window.innerWidth;
+
+    canvas.height =
+        window.innerHeight;
+
+}
+
+
+resizeCanvas();
+
+
+window.addEventListener(
+    "resize",
+    resizeCanvas
+);
+
+
+class Particle {
+
+    constructor() {
+
+        this.x =
+            Math.random() *
+            canvas.width;
+
+        this.y =
+            Math.random() *
+            canvas.height;
+
+        this.size =
+            Math.random() * 2 + .5;
+
+        this.speedX =
+            (Math.random() - .5) * .4;
+
+        this.speedY =
+            (Math.random() - .5) * .4;
+
+        this.opacity =
+            Math.random() * .6;
 
     }
 
-});
 
+    update() {
 
-/* =========================================
-   BOTÃO "ME SURPREENDA"
-========================================= */
+        this.x += this.speedX;
+        this.y += this.speedY;
 
-const surpriseButton =
-    document.getElementById("surpriseButton");
 
-const facts = [
+        if (
+            this.x < 0 ||
+            this.x > canvas.width
+        ) {
 
-    "👁️ A retina é uma camada sensível à luz localizada no fundo do olho.",
+            this.speedX *= -1;
 
-    "🧠 O cérebro participa ativamente da construção da nossa percepção visual.",
+        }
 
-    "💡 A córnea ajuda a focalizar a luz que entra no olho.",
 
-    "🌈 Os cones da retina participam da percepção das cores.",
+        if (
+            this.y < 0 ||
+            this.y > canvas.height
+        ) {
 
-    "🌙 Os bastonetes são importantes para enxergar em condições de pouca luz.",
+            this.speedY *= -1;
 
-    "⚡ O nervo óptico transporta sinais da retina em direção ao cérebro."
-
-];
-
-surpriseButton.addEventListener("click", () => {
-
-    const random =
-        facts[Math.floor(Math.random() * facts.length)];
-
-    alert(random);
-
-});
-
-
-/* =========================================
-   INFORMAÇÕES DAS PARTES DO OLHO
-========================================= */
-
-const parts = {
-
-    cornea: {
-        title: "💎 Córnea",
-        text: "A córnea é a superfície transparente na parte frontal do olho. Ela ajuda a proteger o olho e a desviar a luz para a focalização."
-    },
-
-    iris: {
-        title: "🎨 Íris",
-        text: "A íris é a parte colorida do olho. Ela controla o tamanho da pupila e, consequentemente, ajuda a regular a quantidade de luz que entra."
-    },
-
-    lens: {
-        title: "🔍 Cristalino",
-        text: "O cristalino é uma estrutura transparente localizada atrás da íris. Ele ajuda a focalizar a luz na retina."
-    },
-
-    retina: {
-        title: "⚡ Retina",
-        text: "A retina é uma camada sensível à luz localizada no fundo do olho. Ela possui fotorreceptores que transformam a informação luminosa em sinais elétricos."
-    },
-
-    nerve: {
-        title: "🧠 Nervo óptico",
-        text: "O nervo óptico é formado por fibras nervosas que levam informações da retina para o cérebro."
-    }
-
-};
-
-const partButtons =
-    document.querySelectorAll(".part");
-
-const partInfo =
-    document.getElementById("partInfo");
-
-partButtons.forEach(button => {
-
-    button.addEventListener("click", () => {
-
-        const part =
-            parts[button.dataset.part];
-
-        partInfo.innerHTML = `
-            <h3>${part.title}</h3>
-            <p>${part.text}</p>
-        `;
-
-    });
-
-});
-
-
-/* =========================================
-   CURIOSIDADES
-========================================= */
-
-const factText =
-    document.getElementById("factText");
-
-const factButton =
-    document.getElementById("factButton");
-
-const curiosityFacts = [
-
-    "Você pisca aproximadamente 15 a 20 vezes por minuto.",
-
-    "👁️ A retina possui células especializadas chamadas fotorreceptores.",
-
-    "🧠 A visão envolve tanto os olhos quanto o processamento realizado pelo cérebro.",
-
-    "🌈 Cones e bastonetes possuem funções diferentes na visão.",
-
-    "💧 As lágrimas ajudam a manter a superfície do olho úmida e também contribuem para uma superfície óptica regular."
-
-];
-
-factButton.addEventListener("click", () => {
-
-    const random =
-        curiosityFacts[
-            Math.floor(Math.random() * curiosityFacts.length)
-        ];
-
-    factText.style.opacity = "0";
-
-    setTimeout(() => {
-
-        factText.textContent = random;
-
-        factText.style.opacity = "1";
-
-    }, 250);
-
-});
-
-
-/* =========================================
-   ILUSÃO DE ÓTICA
-========================================= */
-
-const illusionButton =
-    document.getElementById("illusionButton");
-
-const illusionBox =
-    document.querySelector(".illusion-box");
-
-const illusionMessage =
-    document.getElementById("illusionMessage");
-
-illusionButton.addEventListener("click", () => {
-
-    illusionBox.classList.toggle("active");
-
-    if (illusionBox.classList.contains("active")) {
-
-        illusionMessage.textContent =
-            "🌀 Seu cérebro está tentando interpretar padrões e movimento!";
-
-        illusionButton.textContent =
-            "⏹️ Parar ilusão";
-
-    } else {
-
-        illusionMessage.textContent = "";
-
-        illusionButton.textContent =
-            "🌀 Ativar ilusão";
+        }
 
     }
 
+
+    draw() {
+
+        ctx.beginPath();
+
+        ctx.arc(
+            this.x,
+            this.y,
+            this.size,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fillStyle =
+            `rgba(167,139,250,${this.opacity})`;
+
+        ctx.fill();
+
+    }
+
+}
+
+
+function createParticles() {
+
+    particles = [];
+
+    const quantity =
+        Math.min(
+            100,
+            Math.floor(
+                window.innerWidth / 12
+            )
+        );
+
+
+    for (
+        let i = 0;
+        i < quantity;
+        i++
+    ) {
+
+        particles.push(
+            new Particle()
+        );
+
+    }
+
+}
+
+
+createParticles();
+
+
+function animateParticles() {
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    particles.forEach(
+        particle => {
+
+            particle.update();
+            particle.draw();
+
+        }
+    );
+
+
+    requestAnimationFrame(
+        animateParticles
+    );
+
+}
+
+
+animateParticles();
+
+
+/* ==================================
+   CARDS
+================================== */
+
+const cards =
+    document.querySelectorAll(
+        ".phenomenon-card"
+    );
+
+
+cards.forEach(card => {
+
+    const button =
+        card.querySelector(
+            ".learn-button"
+        );
+
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            const title =
+                card.dataset.title;
+
+            const description =
+                card.dataset.description;
+
+
+            alert(
+                `${title}\n\n${description}`
+            );
+
+        }
+    );
+
 });
 
 
-/* =========================================
+/* ==================================
+   SLIDER
+================================== */
+
+const slider =
+    document.getElementById(
+        "lightSlider"
+    );
+
+const sliderValue =
+    document.getElementById(
+        "sliderValue"
+    );
+
+
+slider.addEventListener(
+    "input",
+    () => {
+
+        sliderValue.textContent =
+            slider.value;
+
+
+        const intensity =
+            slider.value / 100;
+
+
+        document.querySelector(
+            ".laser"
+        ).style.opacity =
+            intensity;
+
+
+        document.querySelector(
+            ".spectrum"
+        ).style.opacity =
+            intensity;
+
+    }
+);
+
+
+/* ==================================
    QUIZ
-========================================= */
+================================== */
 
-const quiz = [
+const questions = [
 
     {
         question:
-            "Qual parte controla a quantidade de luz que entra no olho?",
+            "O que acontece quando a luz branca passa por um prisma?",
 
         answers: [
-            "Retina",
-            "Íris",
-            "Nervo óptico",
-            "Cristalino"
+
+            "Ela desaparece",
+            "Ela é separada em diferentes cores",
+            "Ela vira som",
+            "Ela para de se mover"
+
         ],
 
         correct: 1
     },
 
+
     {
         question:
-            "Onde ficam os fotorreceptores?",
+            "Qual fenômeno está relacionado ao espalhamento da luz ao passar por uma abertura estreita?",
 
         answers: [
-            "Retina",
-            "Pupila",
-            "Córnea",
-            "Esclera"
+
+            "Difração",
+            "Reflexão",
+            "Combustão",
+            "Absorção"
+
         ],
 
         correct: 0
     },
 
-    {
-        question:
-            "Qual estrutura transporta informações visuais em direção ao cérebro?",
-
-        answers: [
-            "Íris",
-            "Cristalino",
-            "Nervo óptico",
-            "Córnea"
-        ],
-
-        correct: 2
-    },
 
     {
         question:
-            "Qual estrutura ajuda a focalizar a luz na retina?",
+            "O que é interferência luminosa?",
 
         answers: [
-            "Cristalino",
-            "Pupila",
-            "Nervo óptico",
-            "Íris"
-        ],
 
-        correct: 0
-    },
+            "Quando a luz vira matéria",
+            "Quando ondas luminosas se sobrepõem",
+            "Quando a luz desaparece",
+            "Quando a luz deixa de ser uma onda"
 
-    {
-        question:
-            "O que o cérebro faz com os sinais visuais?",
-
-        answers: [
-            "Ignora os sinais",
-            "Transforma-os em percepção visual",
-            "Manda os sinais de volta para a pupila",
-            "Produz lágrimas"
         ],
 
         correct: 1
+    },
+
+
+    {
+        question:
+            "Qual tecnologia utiliza polarização?",
+
+        answers: [
+
+            "Óculos polarizados",
+            "Termômetro de mercúrio",
+            "Bússola",
+            "Régua"
+
+        ],
+
+        correct: 0
     }
 
 ];
@@ -274,213 +374,248 @@ let currentQuestion = 0;
 
 let score = 0;
 
-const question =
-    document.getElementById("question");
 
-const answersContainer =
-    document.getElementById("answers");
+const questionElement =
+    document.getElementById(
+        "question"
+    );
 
-const questionNumber =
-    document.getElementById("questionNumber");
+const answersElement =
+    document.getElementById(
+        "answers"
+    );
 
-const progress =
-    document.getElementById("progress");
+const startButton =
+    document.getElementById(
+        "startQuiz"
+    );
 
-const quizResult =
-    document.getElementById("quizResult");
+const scoreElement =
+    document.getElementById(
+        "score"
+    );
 
 
-function loadQuestion() {
+function startQuiz() {
 
-    const current =
-        quiz[currentQuestion];
+    currentQuestion = 0;
 
-    question.textContent =
-        current.question;
+    score = 0;
 
-    questionNumber.textContent =
-        `Pergunta ${currentQuestion + 1} de ${quiz.length}`;
+    scoreElement.textContent = "";
 
-    progress.style.width =
-        `${((currentQuestion + 1) / quiz.length) * 100}%`;
+    startButton.style.display =
+        "none";
 
-    answersContainer.innerHTML = "";
-
-    current.answers.forEach((answer, index) => {
-
-        const button =
-            document.createElement("button");
-
-        button.textContent = answer;
-
-        button.classList.add("answer");
-
-        button.addEventListener("click", () => {
-
-            checkAnswer(button, index);
-
-        });
-
-        answersContainer.appendChild(button);
-
-    });
+    showQuestion();
 
 }
 
 
-function checkAnswer(button, index) {
+function showQuestion() {
 
-    const current =
-        quiz[currentQuestion];
-
-    const buttons =
-        document.querySelectorAll(".answer");
-
-    buttons.forEach(btn => {
-
-        btn.disabled = true;
-
-    });
+    const question =
+        questions[currentQuestion];
 
 
-    if (index === current.correct) {
+    questionElement.textContent =
+        question.question;
 
-        button.classList.add("correct");
+
+    answersElement.innerHTML = "";
+
+
+    question.answers.forEach(
+        (answer, index) => {
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+
+            button.className =
+                "answer-button";
+
+
+            button.textContent =
+                answer;
+
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    checkAnswer(index);
+
+                }
+            );
+
+
+            answersElement.appendChild(
+                button
+            );
+
+        }
+    );
+
+}
+
+
+function checkAnswer(index) {
+
+    if (
+        index ===
+        questions[currentQuestion].correct
+    ) {
 
         score++;
-
-    } else {
-
-        button.classList.add("wrong");
-
-        buttons[current.correct]
-            .classList.add("correct");
 
     }
 
 
-    setTimeout(() => {
+    currentQuestion++;
 
-        currentQuestion++;
 
-        if (currentQuestion < quiz.length) {
+    if (
+        currentQuestion <
+        questions.length
+    ) {
 
-            loadQuestion();
+        showQuestion();
 
-        } else {
+    } else {
 
-            finishQuiz();
+        finishQuiz();
 
-        }
-
-    }, 1000);
+    }
 
 }
 
 
 function finishQuiz() {
 
-    question.textContent =
+    questionElement.textContent =
         "🎉 Quiz finalizado!";
 
-    questionNumber.textContent =
-        "RESULTADO";
 
-    answersContainer.innerHTML = "";
+    answersElement.innerHTML = "";
 
-    progress.style.width = "100%";
 
-    let message = "";
+    scoreElement.textContent =
+        `Você acertou ${score} de ${questions.length}!`;
 
-    if (score === 5) {
 
-        message =
-            "🏆 PERFEITO! Você é praticamente um especialista em visão!";
+    startButton.style.display =
+        "inline-block";
 
-    } else if (score >= 3) {
 
-        message =
-            "🔥 Muito bem! Você já entendeu bastante sobre visão.";
-
-    } else {
-
-        message =
-            "👁️ Continue explorando o site e tente novamente!";
-
-    }
-
-    quizResult.innerHTML = `
-        <p>${message}</p>
-        <p>Você acertou <strong>${score}</strong> de <strong>${quiz.length}</strong> perguntas.</p>
-        <br>
-        <button onclick="restartQuiz()" class="main-button">
-            🔄 Jogar novamente
-        </button>
-    `;
+    startButton.textContent =
+        "Refazer quiz";
 
 }
 
 
-function restartQuiz() {
-
-    currentQuestion = 0;
-
-    score = 0;
-
-    quizResult.innerHTML = "";
-
-    loadQuestion();
-
-}
+startButton.addEventListener(
+    "click",
+    startQuiz
+);
 
 
-loadQuestion();
+/* ==================================
+   BOTÃO VOLTAR AO TOPO
+================================== */
 
-
-/* =========================================
-   ANIMAÇÃO AO ROLAR A PÁGINA
-========================================= */
-
-const animatedElements =
-    document.querySelectorAll(
-        ".timeline-card, .curiosity, .video-card, .process-item"
+const topButton =
+    document.getElementById(
+        "topButton"
     );
 
+
+window.addEventListener(
+    "scroll",
+    () => {
+
+        if (
+            window.scrollY > 500
+        ) {
+
+            topButton.classList.add(
+                "show"
+            );
+
+        } else {
+
+            topButton.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+topButton.addEventListener(
+    "click",
+    () => {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+);
+
+
+/* ==================================
+   ANIMAÇÃO AO APARECER
+================================== */
 
 const observer =
     new IntersectionObserver(
         entries => {
 
-            entries.forEach(entry => {
+            entries.forEach(
+                entry => {
 
-                if (entry.isIntersecting) {
+                    if (
+                        entry.isIntersecting
+                    ) {
 
-                    entry.target.style.opacity = "1";
+                        entry.target.style.opacity =
+                            "1";
 
-                    entry.target.style.transform =
-                        "translateY(0)";
+                        entry.target.style.transform =
+                            "translateY(0)";
+
+                    }
 
                 }
-
-            });
+            );
 
         },
         {
-            threshold: 0.15
+            threshold: .15
         }
     );
 
 
-animatedElements.forEach(element => {
+document
+    .querySelectorAll(
+        ".phenomenon-card, .curiosity, .video-card"
+    )
+    .forEach(element => {
 
-    element.style.opacity = "0";
+        element.style.opacity = "0";
 
-    element.style.transform =
-        "translateY(30px)";
+        element.style.transform =
+            "translateY(30px)";
 
-    element.style.transition =
-        "0.7s ease";
+        element.style.transition =
+            "opacity .6s ease, transform .6s ease";
 
-    observer.observe(element);
+        observer.observe(element);
 
-});
+    });
